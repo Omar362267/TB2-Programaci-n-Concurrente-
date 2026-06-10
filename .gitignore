@@ -1,0 +1,31 @@
+# Go
+bin/
+*.test
+coverage.out
+
+# Data grande / sensible
+/data/raw/*
+/data/processed/*
+!/data/raw/.gitkeep
+!/data/processed/.gitkeep
+
+# Resultados generados
+/results/*
+!/results/.gitkeep
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python exploratorio heredado
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
