@@ -7,6 +7,7 @@ coverage.out
 /data/raw/*
 /data/processed/*
 !/data/raw/.gitkeep
+!/data/raw/household_power_consumption.txt
 !/data/processed/.gitkeep
 
 # Resultados generados
