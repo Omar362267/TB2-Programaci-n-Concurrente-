@@ -1,4 +1,4 @@
-# Sistema Concurrente de Análisis y Predicción de Alta Demanda Eléctrica Doméstica
+# Sistema concurrente de análisis y predicción de alta demanda eléctrica doméstica
 
 Proyecto académico para el curso **CC65 Programación Concurrente y Distribuida**.
 
