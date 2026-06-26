@@ -1,6 +1,7 @@
 package features
 
 import (
+	"fmt"
 	"math"
 	"sort"
 	"time"
@@ -24,9 +25,21 @@ var FeatureNames = []string{
 }
 
 // Sample representa un registro transformado para Machine Learning.
+// X contiene valores crudos o normalizados, segun la etapa del pipeline.
 type Sample struct {
 	X []float64 `json:"x"`
 	Y int       `json:"y"`
+}
+
+// Normalizer conserva los parametros min-max calculados exclusivamente
+// sobre el conjunto de entrenamiento. Se persiste junto al modelo para
+// normalizar solicitudes futuras de la misma manera.
+type Normalizer struct {
+	Method       string    `json:"method"`
+	FeatureNames []string  `json:"feature_names"`
+	Mins         []float64 `json:"mins"`
+	Maxs         []float64 `json:"maxs"`
+	FittedOn     string    `json:"fitted_on"`
 }
 
 // Summary resume la generacion de features y la definicion de la variable objetivo.
@@ -40,11 +53,11 @@ type Summary struct {
 	TargetDefinition    string   `json:"target_definition"`
 }
 
-// BuildSamples genera variables predictoras y la etiqueta high_demand.
-// high_demand = 1 cuando Global_active_power >= percentil 75.
+// BuildSamples genera variables predictoras sin normalizarlas.
+// La normalizacion se realiza despues del split train/test para evitar data leakage.
 func BuildSamples(records []preprocessing.PowerRecord) ([]Sample, Summary) {
 	if len(records) == 0 {
-		return nil, Summary{FeatureNames: FeatureNames}
+		return nil, Summary{FeatureNames: append([]string(nil), FeatureNames...)}
 	}
 
 	threshold := percentile75(records)
@@ -75,18 +88,103 @@ func BuildSamples(records []preprocessing.PowerRecord) ([]Sample, Summary) {
 		samples = append(samples, Sample{X: x, Y: y})
 	}
 
-	NormalizeMinMax(samples)
-
 	summary := Summary{
-		FeatureNames:        FeatureNames,
+		FeatureNames:        append([]string(nil), FeatureNames...),
 		TotalSamples:        len(samples),
 		HighDemandThreshold: threshold,
 		HighDemandCount:     high,
 		NormalDemandCount:   len(samples) - high,
-		Normalization:       "min-max por columna sobre el conjunto limpio",
+		Normalization:       "min-max ajustada solo con el conjunto de entrenamiento; los mismos minimos y maximos se aplican a train, test y predicciones futuras",
 		TargetDefinition:    "high_demand = 1 si Global_active_power >= percentil 75; 0 en caso contrario",
 	}
 	return samples, summary
+}
+
+// FitMinMax calcula minimos y maximos usando solo samples de entrenamiento.
+func FitMinMax(samples []Sample) (Normalizer, error) {
+	if len(samples) == 0 {
+		return Normalizer{}, fmt.Errorf("no se puede ajustar normalizador con cero muestras")
+	}
+	featureCount := len(samples[0].X)
+	if featureCount == 0 {
+		return Normalizer{}, fmt.Errorf("las muestras no contienen features")
+	}
+
+	mins := make([]float64, featureCount)
+	maxs := make([]float64, featureCount)
+	for j := 0; j < featureCount; j++ {
+		mins[j] = math.Inf(1)
+		maxs[j] = math.Inf(-1)
+	}
+
+	for i, sample := range samples {
+		if len(sample.X) != featureCount {
+			return Normalizer{}, fmt.Errorf("muestra %d tiene %d features; se esperaban %d", i, len(sample.X), featureCount)
+		}
+		for j, value := range sample.X {
+			if math.IsNaN(value) || math.IsInf(value, 0) {
+				return Normalizer{}, fmt.Errorf("feature no finita en muestra %d, columna %d", i, j)
+			}
+			if value < mins[j] {
+				mins[j] = value
+			}
+			if value > maxs[j] {
+				maxs[j] = value
+			}
+		}
+	}
+
+	names := append([]string(nil), FeatureNames...)
+	if len(names) != featureCount {
+		names = make([]string, featureCount)
+		for i := range names {
+			names[i] = fmt.Sprintf("feature_%d", i)
+		}
+	}
+	return Normalizer{
+		Method:       "min-max",
+		FeatureNames: names,
+		Mins:         mins,
+		Maxs:         maxs,
+		FittedOn:     "training_set_only",
+	}, nil
+}
+
+// TransformVector normaliza un vector con parametros ya ajustados.
+func (n Normalizer) TransformVector(x []float64) ([]float64, error) {
+	if len(n.Mins) == 0 || len(n.Maxs) == 0 || len(n.Mins) != len(n.Maxs) {
+		return nil, fmt.Errorf("normalizador invalido")
+	}
+	if len(x) != len(n.Mins) {
+		return nil, fmt.Errorf("vector con %d features; se esperaban %d", len(x), len(n.Mins))
+	}
+
+	out := make([]float64, len(x))
+	for j, value := range x {
+		if math.IsNaN(value) || math.IsInf(value, 0) {
+			return nil, fmt.Errorf("feature no finita en columna %d", j)
+		}
+		width := n.Maxs[j] - n.Mins[j]
+		if width == 0 {
+			out[j] = 0
+			continue
+		}
+		out[j] = (value - n.Mins[j]) / width
+	}
+	return out, nil
+}
+
+// TransformSamples produce una copia normalizada sin modificar las muestras originales.
+func (n Normalizer) TransformSamples(samples []Sample) ([]Sample, error) {
+	out := make([]Sample, len(samples))
+	for i, sample := range samples {
+		x, err := n.TransformVector(sample.X)
+		if err != nil {
+			return nil, fmt.Errorf("normalizando muestra %d: %w", i, err)
+		}
+		out[i] = Sample{X: x, Y: sample.Y}
+	}
+	return out, nil
 }
 
 // OtherConsumption estima el consumo que no corresponde a los tres submedidores.
@@ -97,43 +195,6 @@ func OtherConsumption(r preprocessing.PowerRecord) float64 {
 		return 0
 	}
 	return other
-}
-
-// NormalizeMinMax escala cada columna al rango [0,1].
-func NormalizeMinMax(samples []Sample) {
-	if len(samples) == 0 || len(samples[0].X) == 0 {
-		return
-	}
-
-	n := len(samples[0].X)
-	mins := make([]float64, n)
-	maxs := make([]float64, n)
-	for j := 0; j < n; j++ {
-		mins[j] = math.Inf(1)
-		maxs[j] = math.Inf(-1)
-	}
-
-	for _, s := range samples {
-		for j, v := range s.X {
-			if v < mins[j] {
-				mins[j] = v
-			}
-			if v > maxs[j] {
-				maxs[j] = v
-			}
-		}
-	}
-
-	for i := range samples {
-		for j, v := range samples[i].X {
-			rangeValue := maxs[j] - mins[j]
-			if rangeValue == 0 {
-				samples[i].X[j] = 0
-				continue
-			}
-			samples[i].X[j] = (v - mins[j]) / rangeValue
-		}
-	}
 }
 
 func percentile75(records []preprocessing.PowerRecord) float64 {

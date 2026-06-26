@@ -1,0 +1,174 @@
+﻿name: pc4-energy-cluster
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: pc4-mongo-compose
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    networks:
+      - pc4-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: pc4-redis-compose
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 5s
+    networks:
+      - pc4-network
+
+  ml-node-1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: runtime
+    image: pc4-energy-runtime:local
+    restart: unless-stopped
+    command:
+      [
+        "ml-node",
+        "-node-id", "ml-node-1",
+        "-host", "0.0.0.0",
+        "-port", "9101",
+        "-shard", "data/distributed/node-01-train.csv",
+        "-workers", "8"
+      ]
+    volumes:
+      - ./data:/app/data:ro
+    expose:
+      - "9101"
+    networks:
+      - pc4-network
+
+  ml-node-2:
+    image: pc4-energy-runtime:local
+    restart: unless-stopped
+    command:
+      [
+        "ml-node",
+        "-node-id", "ml-node-2",
+        "-host", "0.0.0.0",
+        "-port", "9102",
+        "-shard", "data/distributed/node-02-train.csv",
+        "-workers", "8"
+      ]
+    volumes:
+      - ./data:/app/data:ro
+    expose:
+      - "9102"
+    depends_on:
+      ml-node-1:
+        condition: service_started
+    networks:
+      - pc4-network
+
+  ml-node-3:
+    image: pc4-energy-runtime:local
+    restart: unless-stopped
+    command:
+      [
+        "ml-node",
+        "-node-id", "ml-node-3",
+        "-host", "0.0.0.0",
+        "-port", "9103",
+        "-shard", "data/distributed/node-03-train.csv",
+        "-workers", "8"
+      ]
+    volumes:
+      - ./data:/app/data:ro
+    expose:
+      - "9103"
+    depends_on:
+      ml-node-1:
+        condition: service_started
+    networks:
+      - pc4-network
+
+  ml-node-4:
+    image: pc4-energy-runtime:local
+    restart: unless-stopped
+    command:
+      [
+        "ml-node",
+        "-node-id", "ml-node-4",
+        "-host", "0.0.0.0",
+        "-port", "9104",
+        "-shard", "data/distributed/node-04-train.csv",
+        "-workers", "8"
+      ]
+    volumes:
+      - ./data:/app/data:ro
+    expose:
+      - "9104"
+    depends_on:
+      ml-node-1:
+        condition: service_started
+    networks:
+      - pc4-network
+
+  api:
+    image: pc4-energy-runtime:local
+    restart: unless-stopped
+    command:
+      [
+        "api",
+        "-host", "0.0.0.0",
+        "-port", "8080",
+        "-model", "results/final_run_phase1/modelo_entrenado.json",
+        "-trained-model", "results/distributed/modelo_entrenado_distribuido.json",
+        "-test-data", "data/distributed/test.csv",
+        "-nodes", "ml-node-1=ml-node-1:9101,ml-node-2=ml-node-2:9102,ml-node-3=ml-node-3:9103,ml-node-4=ml-node-4:9104",
+        "-mongo-uri", "mongodb://mongo:27017",
+        "-mongo-db", "pc4_energy",
+        "-redis-addr", "redis:6379",
+        "-cache-ttl", "5m"
+      ]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data:ro
+      - ./results:/app/results
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ml-node-1:
+        condition: service_started
+      ml-node-2:
+        condition: service_started
+      ml-node-3:
+        condition: service_started
+      ml-node-4:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:8080/health >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    networks:
+      - pc4-network
+
+networks:
+  pc4-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:

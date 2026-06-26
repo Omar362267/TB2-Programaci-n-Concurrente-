@@ -6,13 +6,13 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"math/rand"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strconv"
 	"time"
 
+	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/distributed"
 	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/features"
 	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/loader"
 	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/metrics"
@@ -26,20 +26,6 @@ type modelOutput struct {
 	TrainSamples   int                          `json:"train_samples"`
 	TestSamples    int                          `json:"test_samples"`
 	Model          ml.LogisticRegression        `json:"model"`
-}
-
-type modelArtifact struct {
-	ModelName        string                `json:"model_name"`
-	ProblemType      string                `json:"problem_type"`
-	Target           string                `json:"target"`
-	FeatureNames     []string              `json:"feature_names"`
-	ThresholdP75     float64               `json:"high_demand_threshold_p75"`
-	Normalization    string                `json:"normalization"`
-	DecisionBoundary float64               `json:"decision_boundary"`
-	Model            ml.LogisticRegression `json:"model"`
-	TrainReport      ml.TrainReport        `json:"train_report"`
-	CreatedAt        string                `json:"created_at"`
-	UsageNote        string                `json:"usage_note"`
 }
 
 type benchmarkOutput struct {
@@ -122,20 +108,41 @@ func main() {
 	}
 
 	featureStart := time.Now()
-	samples, featureSummary := features.BuildSamples(loadResult.Records)
-	featureDuration := time.Since(featureStart)
-	if len(samples) < 10 {
-		log.Fatalf("registros validos insuficientes para entrenar: %d", len(samples))
+	rawSamples, featureSummary := features.BuildSamples(loadResult.Records)
+	if len(rawSamples) < 10 {
+		log.Fatalf("registros validos insuficientes para entrenar: %d", len(rawSamples))
 	}
 
+	// El split ocurre antes de ajustar la normalizacion para evitar data leakage.
+	rawTrainSamples, rawTestSamples, err := distributed.SplitTrainTest(rawSamples, distributed.SplitConfig{TestRatio: *testRatio, Seed: 42})
+	if err != nil {
+		log.Fatalf("no se pudo separar train/test: %v", err)
+	}
+	normalizer, err := features.FitMinMax(rawTrainSamples)
+	if err != nil {
+		log.Fatalf("no se pudo ajustar normalizacion con train: %v", err)
+	}
+	trainSamples, err := normalizer.TransformSamples(rawTrainSamples)
+	if err != nil {
+		log.Fatalf("no se pudo normalizar train: %v", err)
+	}
+	testSamples, err := normalizer.TransformSamples(rawTestSamples)
+	if err != nil {
+		log.Fatalf("no se pudo normalizar test: %v", err)
+	}
+	featureDuration := time.Since(featureStart)
+
 	if *saveProcessed {
+		// Se guarda el dataset completo usando parametros ajustados solo con train.
+		normalizedAll, err := normalizer.TransformSamples(rawSamples)
+		if err != nil {
+			log.Fatalf("no se pudo normalizar dataset procesado: %v", err)
+		}
 		processedPath := filepath.Join(*processedOut, "features_high_demand.csv")
-		if err := writeProcessedSamplesCSV(processedPath, samples, *processedLimit); err != nil {
+		if err := writeProcessedSamplesCSV(processedPath, normalizedAll, *processedLimit); err != nil {
 			log.Fatal(err)
 		}
 	}
-
-	trainSamples, testSamples := splitTrainTest(samples, *testRatio)
 
 	trainStart := time.Now()
 	model, trainReport := ml.TrainParallel(trainSamples, ml.TrainConfig{
@@ -161,20 +168,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	artifact := modelArtifact{
+	artifact := ml.ModelArtifact{
 		ModelName:        "logistic_regression_high_demand",
 		ProblemType:      "clasificacion_binaria",
 		Target:           featureSummary.TargetDefinition,
 		FeatureNames:     featureSummary.FeatureNames,
 		ThresholdP75:     featureSummary.HighDemandThreshold,
 		Normalization:    featureSummary.Normalization,
+		Normalizer:       normalizer,
 		DecisionBoundary: 0.5,
 		Model:            *model,
 		TrainReport:      trainReport,
 		CreatedAt:        time.Now().Format(time.RFC3339),
-		UsageNote:        "Para PC4/API: normalizar las mismas features con el mismo criterio y aplicar sigmoid(bias + sum(weights[i]*x[i])). Si probabilidad >= 0.5, high_demand=1.",
+		UsageNote:        "Las features recibidas por una API deben conservar el orden feature_names y normalizarse con normalizer (ajustado solo con train) antes de aplicar sigmoid(bias + sum(weights[i]*x[i])). Si probabilidad >= decision_boundary, high_demand=1.",
 	}
-	if err := writeJSON(filepath.Join(*out, "modelo_entrenado.json"), artifact); err != nil {
+	if err := ml.SaveArtifact(filepath.Join(*out, "modelo_entrenado.json"), artifact); err != nil {
 		log.Fatal(err)
 	}
 
@@ -223,26 +231,6 @@ func main() {
 		fmt.Printf("Dataset procesado guardado en: %s\n", filepath.Join(*processedOut, "features_high_demand.csv"))
 	}
 	fmt.Printf("Resultados generados en: %s\n", *out)
-}
-
-func splitTrainTest(samples []features.Sample, testRatio float64) ([]features.Sample, []features.Sample) {
-	// Copia y mezcla deterministica para evitar que el corte temporal deje clases desbalanceadas.
-	shuffled := make([]features.Sample, len(samples))
-	copy(shuffled, samples)
-	rng := rand.New(rand.NewSource(42))
-	rng.Shuffle(len(shuffled), func(i, j int) {
-		shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
-	})
-
-	testSize := int(float64(len(shuffled)) * testRatio)
-	if testSize < 1 {
-		testSize = 1
-	}
-	trainSize := len(shuffled) - testSize
-	if trainSize < 1 {
-		trainSize = len(shuffled) - 1
-	}
-	return shuffled[:trainSize], shuffled[trainSize:]
 }
 
 func writeJSON(path string, value any) error {
