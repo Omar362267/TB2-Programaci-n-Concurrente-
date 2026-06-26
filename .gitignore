@@ -1,32 +1,82 @@
-# Go
+# =========================
+# Go: binarios y artefactos
+# =========================
 bin/
+*.exe
+*.out
 *.test
 coverage.out
+*.prof
 
-# Data grande / sensible
+# =========================
+# Datos grandes y generados
+# =========================
 /data/raw/*
-/data/processed/*
 !/data/raw/.gitkeep
-!/data/raw/household_power_consumption.txt
+
+/data/processed/*
 !/data/processed/.gitkeep
 
+# Shards generados para PC4
+/data/distributed/
+/data/distributed-*/
+/data/distributed_*/
+/data/*-smoke/
+
+# =========================
 # Resultados generados
+# =========================
 /results/*
 !/results/.gitkeep
+!/results/README.md
 
-# Entorno
+# Logs y temporales
+*.log
+*.tmp
+*.bak
+
+# =========================
+# Documentos de entrega
+# =========================
+/docs/*.pdf
+/docs/*.docx
+/docs/*.doc
+/docs/*.pptx
+/docs/*.xlsx
+/docs/*.zip
+/docs/*.md
+
+# =========================
+# Docker local
+# =========================
+docker-compose.override.yml
+compose.override.yml
+mongo_data/
+redis_data/
+
+# =========================
+# Variables de entorno
+# =========================
 .env
 .env.*
 !.env.example
 
-# SO / editor
+# =========================
+# Sistema operativo y editores
+# =========================
 .DS_Store
 Thumbs.db
+desktop.ini
 .vscode/
 .idea/
+*.swp
+*.swo
 
+# =========================
 # Python exploratorio heredado
+# =========================
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
 .venv/
 venv/
