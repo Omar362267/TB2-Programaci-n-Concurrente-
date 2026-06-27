@@ -1,6 +1,6 @@
 # TB2 - Programación Concurrente y Distribuida (PC3 + PC4)
 
-## Autor
+## Autores
 - U202222148 - Pariona Rojas, Axel Yamir
 - U201613422 - Acuña Villegas, Omar Junior
 - U201925837 - Chui Sanchez, Rafael Thomas
