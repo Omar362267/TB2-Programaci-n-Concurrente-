@@ -132,4 +132,21 @@ El sistema soporta:
 # Ejecución
 
 PC3:
-.\scripts\pc3
+.\scripts\pc3\00-run-all.ps1
+
+PC4:
+.\scripts\pc4\00-run-all.ps1 -FreshStart
+
+# Evidencias
+Carpeta: /evidence/
+
+Incluye:
+- limpieza de datos
+- entrenamiento
+- métricas
+- benchmarks
+- cluster distribuido
+- tolerancia a fallos
+
+# Conclusión
+El proyecto evoluciona desde concurrencia (PC3) hacia distribución (PC4), logrando escalabilidad, tolerancia a fallos y buen desempeño del modelo.
