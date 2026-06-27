@@ -1,0 +1,5 @@
+﻿{
+    "iterations":  300,
+    "learning_rate":  1,
+    "reset_model":  true
+}

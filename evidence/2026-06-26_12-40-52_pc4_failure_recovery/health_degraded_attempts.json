@@ -1,0 +1,8 @@
+﻿{
+    "checked_at":  "2026-06-26T12:40:56.2865551-05:00",
+    "api_status":  "degraded",
+    "cluster_status":  "degraded",
+    "nodes_available":  3,
+    "nodes_total":  4,
+    "error":  null
+}

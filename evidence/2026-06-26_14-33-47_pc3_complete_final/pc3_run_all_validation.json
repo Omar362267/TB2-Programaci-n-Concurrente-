@@ -1,0 +1,9 @@
+﻿{
+    "base_training_completed":  true,
+    "workers_benchmark_completed":  true,
+    "analysis_completed":  true,
+    "base_validation":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\01_base_training\\pc3_base_validation.json",
+    "benchmark_validation":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\02_workers_benchmark\\pc3_workers_benchmark_validation.json",
+    "analysis_validation":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\03_analysis\\pc3_analysis_validation.json",
+    "generated_at":  "2026-06-26T14:39:39.7890304-05:00"
+}

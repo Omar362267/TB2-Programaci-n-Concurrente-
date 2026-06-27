@@ -1,0 +1,18 @@
+﻿[
+    {
+        "checked_at":  "2026-06-26T14:32:19.2979078-05:00",
+        "status":  null,
+        "cluster":  null,
+        "available":  null,
+        "total":  null,
+        "error":  "Se ha terminado la conexión: La conexión ha terminado de forma inesperada."
+    },
+    {
+        "checked_at":  "2026-06-26T14:32:22.3127636-05:00",
+        "status":  "ready",
+        "cluster":  "ready",
+        "available":  4,
+        "total":  4,
+        "error":  null
+    }
+]

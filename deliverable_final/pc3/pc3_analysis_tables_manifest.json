@@ -1,0 +1,38 @@
+﻿[
+    {
+        "relative_path":  "analisis_resumen.md",
+        "bytes":  611
+    },
+    {
+        "relative_path":  "consumo_por_dia_semana.csv",
+        "bytes":  341
+    },
+    {
+        "relative_path":  "consumo_por_hora.csv",
+        "bytes":  929
+    },
+    {
+        "relative_path":  "consumo_por_mes.csv",
+        "bytes":  531
+    },
+    {
+        "relative_path":  "distribucion_high_demand.json",
+        "bytes":  245
+    },
+    {
+        "relative_path":  "estadisticas_descriptivas.csv",
+        "bytes":  771
+    },
+    {
+        "relative_path":  "estadisticas_descriptivas.json",
+        "bytes":  1749
+    },
+    {
+        "relative_path":  "histograma_global_active_power.json",
+        "bytes":  1420
+    },
+    {
+        "relative_path":  "matriz_correlacion.csv",
+        "bytes":  859
+    }
+]

@@ -1,0 +1,14 @@
+﻿{
+    "api_status":  "ready",
+    "cluster_status":  "ready",
+    "nodes_total":  4,
+    "nodes_available":  4,
+    "total_samples":  1639424,
+    "feature_count":  11,
+    "mongo_enabled":  true,
+    "mongo_status":  "ready",
+    "redis_enabled":  true,
+    "redis_status":  "ready",
+    "cache_ttl_seconds":  300,
+    "compose_ready":  true
+}

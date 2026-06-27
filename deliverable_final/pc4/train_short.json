@@ -1,0 +1,144 @@
+﻿{
+    "model":  {
+                  "ready":  true,
+                  "version":  2,
+                  "feature_names":  [
+                                        "hour",
+                                        "day_of_week",
+                                        "month",
+                                        "is_weekend",
+                                        "voltage",
+                                        "global_reactive_power",
+                                        "global_intensity",
+                                        "sub_metering_1",
+                                        "sub_metering_2",
+                                        "sub_metering_3",
+                                        "other_consumption"
+                                    ],
+                  "decision_boundary":  0.5,
+                  "weights":  [
+                                  0.017894351439612256,
+                                  -0.25464472311194497,
+                                  -0.29784288045815865,
+                                  0.0034183293941019814,
+                                  -0.48353292660027253,
+                                  0.02146228887465905,
+                                  0.24866457960468763,
+                                  0.08170162628325817,
+                                  0.07362781461393865,
+                                  0.4640173824511103,
+                                  0.14586231647073242
+                              ],
+                  "bias":  -0.6156497390087426,
+                  "last_training":  {
+                                        "started_at":  "2026-06-26T19:32:23Z",
+                                        "finished_at":  "2026-06-26T19:32:23Z",
+                                        "duration_ms":  450,
+                                        "iterations":  10,
+                                        "learning_rate":  1,
+                                        "nodes_used":  4,
+                                        "samples_per_iteration":  1639424,
+                                        "initial_loss":  0.6931471805591257,
+                                        "final_loss":  0.5236235821515686,
+                                        "history":  [
+                                                        {
+                                                            "iteration":  1,
+                                                            "loss":  0.6931471805591257
+                                                        },
+                                                        {
+                                                            "iteration":  2,
+                                                            "loss":  0.5975567729512877
+                                                        },
+                                                        {
+                                                            "iteration":  3,
+                                                            "loss":  0.5723403752376324
+                                                        },
+                                                        {
+                                                            "iteration":  4,
+                                                            "loss":  0.5611166144617036
+                                                        },
+                                                        {
+                                                            "iteration":  5,
+                                                            "loss":  0.5534001667222443
+                                                        },
+                                                        {
+                                                            "iteration":  6,
+                                                            "loss":  0.5467874081012805
+                                                        },
+                                                        {
+                                                            "iteration":  7,
+                                                            "loss":  0.540637124355799
+                                                        },
+                                                        {
+                                                            "iteration":  8,
+                                                            "loss":  0.5347607521189688
+                                                        },
+                                                        {
+                                                            "iteration":  9,
+                                                            "loss":  0.5290972916215448
+                                                        },
+                                                        {
+                                                            "iteration":  10,
+                                                            "loss":  0.5236235821515686
+                                                        }
+                                                    ],
+                                        "parallelism":  "API coordinadora consulta nodos TCP en paralelo; cada nodo calcula gradientes locales con goroutines; la API reduce resultados y actualiza pesos en una única sección crítica"
+                                    },
+                  "artifact_path":  "results/distributed/modelo_entrenado_distribuido.json"
+              },
+    "status":  "trained",
+    "training":  {
+                     "started_at":  "2026-06-26T19:32:23Z",
+                     "finished_at":  "2026-06-26T19:32:23Z",
+                     "duration_ms":  450,
+                     "iterations":  10,
+                     "learning_rate":  1,
+                     "nodes_used":  4,
+                     "samples_per_iteration":  1639424,
+                     "initial_loss":  0.6931471805591257,
+                     "final_loss":  0.5236235821515686,
+                     "history":  [
+                                     {
+                                         "iteration":  1,
+                                         "loss":  0.6931471805591257
+                                     },
+                                     {
+                                         "iteration":  2,
+                                         "loss":  0.5975567729512877
+                                     },
+                                     {
+                                         "iteration":  3,
+                                         "loss":  0.5723403752376324
+                                     },
+                                     {
+                                         "iteration":  4,
+                                         "loss":  0.5611166144617036
+                                     },
+                                     {
+                                         "iteration":  5,
+                                         "loss":  0.5534001667222443
+                                     },
+                                     {
+                                         "iteration":  6,
+                                         "loss":  0.5467874081012805
+                                     },
+                                     {
+                                         "iteration":  7,
+                                         "loss":  0.540637124355799
+                                     },
+                                     {
+                                         "iteration":  8,
+                                         "loss":  0.5347607521189688
+                                     },
+                                     {
+                                         "iteration":  9,
+                                         "loss":  0.5290972916215448
+                                     },
+                                     {
+                                         "iteration":  10,
+                                         "loss":  0.5236235821515686
+                                     }
+                                 ],
+                     "parallelism":  "API coordinadora consulta nodos TCP en paralelo; cada nodo calcula gradientes locales con goroutines; la API reduce resultados y actualiza pesos en una única sección crítica"
+                 }
+}

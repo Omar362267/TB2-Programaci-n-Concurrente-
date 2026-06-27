@@ -1,0 +1,26 @@
+﻿[
+    {
+        "checked_at":  "2026-06-26T12:40:59.9004435-05:00",
+        "api_status":  "degraded",
+        "cluster_status":  "degraded",
+        "nodes_available":  3,
+        "nodes_total":  4,
+        "error":  null
+    },
+    {
+        "checked_at":  "2026-06-26T12:41:02.9508995-05:00",
+        "api_status":  "degraded",
+        "cluster_status":  "degraded",
+        "nodes_available":  3,
+        "nodes_total":  4,
+        "error":  null
+    },
+    {
+        "checked_at":  "2026-06-26T12:41:05.9726858-05:00",
+        "api_status":  "ready",
+        "cluster_status":  "ready",
+        "nodes_available":  4,
+        "nodes_total":  4,
+        "error":  null
+    }
+]

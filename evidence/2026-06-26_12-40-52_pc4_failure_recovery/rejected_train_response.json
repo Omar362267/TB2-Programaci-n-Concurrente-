@@ -1,0 +1,6 @@
+﻿{
+    "succeeded":  false,
+    "status_code":  503,
+    "response":  "{\"detail\":\"entrenamiento requiere cluster ready; estado actual: degraded (3/4 nodos disponibles)\",\"error\":\"no se pudo entrenar el modelo distribuido\"}\n",
+    "error":  "Error en el servidor remoto: (503) Servidor no disponible."
+}

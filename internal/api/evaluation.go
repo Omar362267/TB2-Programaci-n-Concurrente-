@@ -1,0 +1,120 @@
+package api
+
+import (
+	"context"
+	"fmt"
+	"math"
+	"time"
+
+	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/distributed"
+	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/features"
+	"github.com/Axel-Pariona/pc3-consumo-electrico-go/internal/metrics"
+)
+
+type EvaluationReport struct {
+	ModelVersion     int                          `json:"model_version"`
+	TestDataPath     string                       `json:"test_data_path"`
+	Samples          int                          `json:"samples"`
+	FeatureCount     int                          `json:"feature_count"`
+	DecisionBoundary float64                      `json:"decision_boundary"`
+	Loss             float64                      `json:"loss"`
+	Classification   metrics.ClassificationReport `json:"classification"`
+	DurationMS       int64                        `json:"duration_ms"`
+	EvaluatedAt      string                       `json:"evaluated_at"`
+	DataSplit        string                       `json:"data_split"`
+}
+
+func (s *Service) ConfigureEvaluation(testDataPath string) error {
+	if testDataPath == "" {
+		return fmt.Errorf("test_data es obligatorio")
+	}
+
+	s.modelMu.RLock()
+	configured := s.modelConfigured
+	expected := append([]string(nil), s.artifact.FeatureNames...)
+	s.modelMu.RUnlock()
+	if !configured {
+		return fmt.Errorf("configure primero el modelo antes del conjunto de prueba")
+	}
+
+	samples, names, err := distributed.ReadShardCSV(testDataPath)
+	if err != nil {
+		return fmt.Errorf("cargando test.csv: %w", err)
+	}
+	if len(names) != len(expected) {
+		return fmt.Errorf("test.csv tiene %d features; el modelo espera %d", len(names), len(expected))
+	}
+	for i := range expected {
+		if names[i] != expected[i] {
+			return fmt.Errorf("orden de feature incompatible en posición %d: test=%s modelo=%s", i, names[i], expected[i])
+		}
+	}
+
+	copied := make([]features.Sample, len(samples))
+	for i, sample := range samples {
+		copied[i] = features.Sample{X: append([]float64(nil), sample.X...), Y: sample.Y}
+	}
+	s.evaluationMu.Lock()
+	s.evaluationSamples = copied
+	s.evaluationPath = testDataPath
+	s.evaluationMu.Unlock()
+	return nil
+}
+
+func (s *Service) EvaluateCurrentModel(_ context.Context) (EvaluationReport, error) {
+	started := time.Now()
+
+	s.evaluationMu.RLock()
+	samples := s.evaluationSamples
+	path := s.evaluationPath
+	s.evaluationMu.RUnlock()
+	if len(samples) == 0 {
+		return EvaluationReport{}, fmt.Errorf("conjunto de prueba no configurado; inicie la API con -test-data")
+	}
+
+	s.modelMu.RLock()
+	configured := s.modelConfigured
+	version := s.modelVersion
+	model := cloneModel(s.model)
+	boundary := s.artifact.DecisionBoundary
+	featureCount := len(s.artifact.FeatureNames)
+	s.modelMu.RUnlock()
+	if !configured {
+		return EvaluationReport{}, fmt.Errorf("modelo no configurado")
+	}
+
+	actual := make([]int, len(samples))
+	predicted := make([]int, len(samples))
+	lossSum := 0.0
+	for i, sample := range samples {
+		if len(sample.X) != len(model.Weights) {
+			return EvaluationReport{}, fmt.Errorf("muestra de test %d incompatible: %d features, modelo %d", i, len(sample.X), len(model.Weights))
+		}
+		probability := model.PredictProbability(sample.X)
+		actual[i] = sample.Y
+		if probability >= boundary {
+			predicted[i] = 1
+		}
+		lossSum += evaluationLogLoss(float64(sample.Y), probability)
+	}
+
+	report := EvaluationReport{
+		ModelVersion:     version,
+		TestDataPath:     path,
+		Samples:          len(samples),
+		FeatureCount:     featureCount,
+		DecisionBoundary: boundary,
+		Loss:             lossSum / float64(len(samples)),
+		Classification:   metrics.ComputeClassification(actual, predicted),
+		DurationMS:       time.Since(started).Milliseconds(),
+		EvaluatedAt:      time.Now().Format(time.RFC3339),
+		DataSplit:        "hold-out test.csv; no usado para actualizar pesos",
+	}
+	return report, nil
+}
+
+func evaluationLogLoss(y, probability float64) float64 {
+	const epsilon = 1e-15
+	probability = math.Max(epsilon, math.Min(1-epsilon, probability))
+	return -(y*math.Log(probability) + (1-y)*math.Log(1-probability))
+}

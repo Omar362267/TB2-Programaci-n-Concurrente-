@@ -1,0 +1,10 @@
+﻿{
+    "name":  "pc3_base_training",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:33:48.3509649-05:00",
+    "finished_at":  "2026-06-26T14:34:03.9706504-05:00",
+    "duration_ms":  15620,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

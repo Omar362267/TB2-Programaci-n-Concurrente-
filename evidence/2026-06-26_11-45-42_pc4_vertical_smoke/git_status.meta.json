@@ -1,0 +1,10 @@
+﻿{
+    "name":  "git_status",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:46:00.5622644-05:00",
+    "finished_at":  "2026-06-26T11:46:00.6094453-05:00",
+    "duration_ms":  47,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

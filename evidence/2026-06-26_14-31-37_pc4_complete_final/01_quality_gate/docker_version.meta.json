@@ -1,0 +1,10 @@
+﻿{
+    "name":  "docker_version",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:31:41.4229624-05:00",
+    "finished_at":  "2026-06-26T14:31:41.5355604-05:00",
+    "duration_ms":  113,
+    "exit_code":  0,
+    "allow_failure":  true,
+    "error":  null
+}

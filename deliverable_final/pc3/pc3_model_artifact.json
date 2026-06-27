@@ -1,0 +1,1300 @@
+{
+  "model_name": "logistic_regression_high_demand",
+  "problem_type": "clasificacion_binaria",
+  "target": "high_demand = 1 si Global_active_power \u003e= percentil 75; 0 en caso contrario",
+  "feature_names": [
+    "hour",
+    "day_of_week",
+    "month",
+    "is_weekend",
+    "voltage",
+    "global_reactive_power",
+    "global_intensity",
+    "sub_metering_1",
+    "sub_metering_2",
+    "sub_metering_3",
+    "other_consumption"
+  ],
+  "high_demand_threshold_p75": 1.528,
+  "normalization": "min-max ajustada solo con el conjunto de entrenamiento; los mismos minimos y maximos se aplican a train, test y predicciones futuras",
+  "normalizer": {
+    "method": "min-max",
+    "feature_names": [
+      "hour",
+      "day_of_week",
+      "month",
+      "is_weekend",
+      "voltage",
+      "global_reactive_power",
+      "global_intensity",
+      "sub_metering_1",
+      "sub_metering_2",
+      "sub_metering_3",
+      "other_consumption"
+    ],
+    "mins": [
+      0,
+      0,
+      1,
+      0,
+      223.2,
+      0,
+      0.2,
+      0,
+      0,
+      0,
+      -2.1333333333333337
+    ],
+    "maxs": [
+      23,
+      6,
+      12,
+      1,
+      254.15,
+      1.39,
+      48.4,
+      88,
+      80,
+      31,
+      124.83333333333334
+    ],
+    "fitted_on": "training_set_only"
+  },
+  "decision_boundary": 0.5,
+  "model": {
+    "weights": [
+      1.5145123520260488,
+      -0.24761015417945192,
+      -0.2536660781880492,
+      0.34019510054361574,
+      -2.596944093007761,
+      0.9976124728473749,
+      4.27348341703481,
+      1.4412072697335616,
+      1.3943710332767167,
+      3.709904959007763,
+      3.6027493279894105
+    ],
+    "bias": -2.376890573508287
+  },
+  "train_report": {
+    "config": {
+      "iterations": 300,
+      "learning_rate": 1,
+      "workers": 8
+    },
+    "initial_loss": 0.6931471805596298,
+    "final_loss": 0.2685541601294394,
+    "train_samples": 1639424,
+    "feature_count": 11,
+    "training_history": [
+      {
+        "iteration": 0,
+        "loss": 0.6931471805596298
+      },
+      {
+        "iteration": 1,
+        "loss": 0.6931471805596298
+      },
+      {
+        "iteration": 2,
+        "loss": 0.5975567729527207
+      },
+      {
+        "iteration": 3,
+        "loss": 0.5723403752768498
+      },
+      {
+        "iteration": 4,
+        "loss": 0.5611166145413369
+      },
+      {
+        "iteration": 5,
+        "loss": 0.5534001668405816
+      },
+      {
+        "iteration": 6,
+        "loss": 0.5467874082558397
+      },
+      {
+        "iteration": 7,
+        "loss": 0.5406371245439817
+      },
+      {
+        "iteration": 8,
+        "loss": 0.5347607523382197
+      },
+      {
+        "iteration": 9,
+        "loss": 0.5290972918693994
+      },
+      {
+        "iteration": 10,
+        "loss": 0.5236235824256964
+      },
+      {
+        "iteration": 11,
+        "loss": 0.5183280406601026
+      },
+      {
+        "iteration": 12,
+        "loss": 0.5132027391678115
+      },
+      {
+        "iteration": 13,
+        "loss": 0.5082409886485909
+      },
+      {
+        "iteration": 14,
+        "loss": 0.5034366013166207
+      },
+      {
+        "iteration": 15,
+        "loss": 0.49878366989539324
+      },
+      {
+        "iteration": 16,
+        "loss": 0.4942765032326996
+      },
+      {
+        "iteration": 17,
+        "loss": 0.4899096081060247
+      },
+      {
+        "iteration": 18,
+        "loss": 0.4856776836706067
+      },
+      {
+        "iteration": 19,
+        "loss": 0.4815756186716763
+      },
+      {
+        "iteration": 20,
+        "loss": 0.47759848871750443
+      },
+      {
+        "iteration": 21,
+        "loss": 0.47374155301354554
+      },
+      {
+        "iteration": 22,
+        "loss": 0.470000250531474
+      },
+      {
+        "iteration": 23,
+        "loss": 0.4663701957153109
+      },
+      {
+        "iteration": 24,
+        "loss": 0.4628471738369313
+      },
+      {
+        "iteration": 25,
+        "loss": 0.459427136096743
+      },
+      {
+        "iteration": 26,
+        "loss": 0.45610619454738
+      },
+      {
+        "iteration": 27,
+        "loss": 0.45288061690387404
+      },
+      {
+        "iteration": 28,
+        "loss": 0.44974682129223065
+      },
+      {
+        "iteration": 29,
+        "loss": 0.4467013709792551
+      },
+      {
+        "iteration": 30,
+        "loss": 0.4437409691194258
+      },
+      {
+        "iteration": 31,
+        "loss": 0.4408624535483111
+      },
+      {
+        "iteration": 32,
+        "loss": 0.4380627916470624
+      },
+      {
+        "iteration": 33,
+        "loss": 0.43533907529792887
+      },
+      {
+        "iteration": 34,
+        "loss": 0.4326885159470261
+      },
+      {
+        "iteration": 35,
+        "loss": 0.4301084397871896
+      },
+      {
+        "iteration": 36,
+        "loss": 0.4275962830709115
+      },
+      {
+        "iteration": 37,
+        "loss": 0.42514958756087773
+      },
+      {
+        "iteration": 38,
+        "loss": 0.42276599612346394
+      },
+      {
+        "iteration": 39,
+        "loss": 0.42044324846875
+      },
+      {
+        "iteration": 40,
+        "loss": 0.418179177039016
+      },
+      {
+        "iteration": 41,
+        "loss": 0.4159717030464794
+      },
+      {
+        "iteration": 42,
+        "loss": 0.41381883265982783
+      },
+      {
+        "iteration": 43,
+        "loss": 0.4117186533381779
+      },
+      {
+        "iteration": 44,
+        "loss": 0.4096693303104897
+      },
+      {
+        "iteration": 45,
+        "loss": 0.40766910319768135
+      },
+      {
+        "iteration": 46,
+        "loss": 0.40571628277429744
+      },
+      {
+        "iteration": 47,
+        "loss": 0.4038092478661687
+      },
+      {
+        "iteration": 48,
+        "loss": 0.4019464423802798
+      },
+      {
+        "iteration": 49,
+        "loss": 0.40012637246268445
+      },
+      {
+        "iteration": 50,
+        "loss": 0.3983476037803283
+      },
+      {
+        "iteration": 51,
+        "loss": 0.39660875892249975
+      },
+      {
+        "iteration": 52,
+        "loss": 0.3949085149174334
+      },
+      {
+        "iteration": 53,
+        "loss": 0.3932456008598908
+      },
+      {
+        "iteration": 54,
+        "loss": 0.39161879564515767
+      },
+      {
+        "iteration": 55,
+        "loss": 0.39002692580538195
+      },
+      {
+        "iteration": 56,
+        "loss": 0.38846886344385606
+      },
+      {
+        "iteration": 57,
+        "loss": 0.38694352426322637
+      },
+      {
+        "iteration": 58,
+        "loss": 0.3854498656835212
+      },
+      {
+        "iteration": 59,
+        "loss": 0.3839868850461312
+      },
+      {
+        "iteration": 60,
+        "loss": 0.3825536178998921
+      },
+      {
+        "iteration": 61,
+        "loss": 0.3811491363655924
+      },
+      {
+        "iteration": 62,
+        "loss": 0.3797725475754141
+      },
+      {
+        "iteration": 63,
+        "loss": 0.37842299218377967
+      },
+      {
+        "iteration": 64,
+        "loss": 0.3770996429464497
+      },
+      {
+        "iteration": 65,
+        "loss": 0.3758017033645465
+      },
+      {
+        "iteration": 66,
+        "loss": 0.37452840639062707
+      },
+      {
+        "iteration": 67,
+        "loss": 0.3732790131938035
+      },
+      {
+        "iteration": 68,
+        "loss": 0.37205281198114326
+      },
+      {
+        "iteration": 69,
+        "loss": 0.3708491168727549
+      },
+      {
+        "iteration": 70,
+        "loss": 0.36966726682793494
+      },
+      {
+        "iteration": 71,
+        "loss": 0.3685066246199947
+      },
+      {
+        "iteration": 72,
+        "loss": 0.3673665758574556
+      },
+      {
+        "iteration": 73,
+        "loss": 0.3662465280494102
+      },
+      {
+        "iteration": 74,
+        "loss": 0.36514590971289157
+      },
+      {
+        "iteration": 75,
+        "loss": 0.36406416952035675
+      },
+      {
+        "iteration": 76,
+        "loss": 0.3630007754852633
+      },
+      {
+        "iteration": 77,
+        "loss": 0.36195521418397325
+      },
+      {
+        "iteration": 78,
+        "loss": 0.36092699001228795
+      },
+      {
+        "iteration": 79,
+        "loss": 0.3599156244749034
+      },
+      {
+        "iteration": 80,
+        "loss": 0.35892065550624785
+      },
+      {
+        "iteration": 81,
+        "loss": 0.3579416368212271
+      },
+      {
+        "iteration": 82,
+        "loss": 0.35697813729448363
+      },
+      {
+        "iteration": 83,
+        "loss": 0.3560297403667138
+      },
+      {
+        "iteration": 84,
+        "loss": 0.3550960434769142
+      },
+      {
+        "iteration": 85,
+        "loss": 0.3541766575192316
+      },
+      {
+        "iteration": 86,
+        "loss": 0.35327120632328135
+      },
+      {
+        "iteration": 87,
+        "loss": 0.35237932615687106
+      },
+      {
+        "iteration": 88,
+        "loss": 0.3515006652500417
+      },
+      {
+        "iteration": 89,
+        "loss": 0.35063488333945736
+      },
+      {
+        "iteration": 90,
+        "loss": 0.34978165123216864
+      },
+      {
+        "iteration": 91,
+        "loss": 0.3489406503879
+      },
+      {
+        "iteration": 92,
+        "loss": 0.34811157251893415
+      },
+      {
+        "iteration": 93,
+        "loss": 0.3472941192068686
+      },
+      {
+        "iteration": 94,
+        "loss": 0.346488001535385
+      },
+      {
+        "iteration": 95,
+        "loss": 0.34569293973834825
+      },
+      {
+        "iteration": 96,
+        "loss": 0.34490866286255567
+      },
+      {
+        "iteration": 97,
+        "loss": 0.34413490844437405
+      },
+      {
+        "iteration": 98,
+        "loss": 0.343371422199771
+      },
+      {
+        "iteration": 99,
+        "loss": 0.3426179577269911
+      },
+      {
+        "iteration": 100,
+        "loss": 0.34187427622142874
+      },
+      {
+        "iteration": 101,
+        "loss": 0.34114014620210303
+      },
+      {
+        "iteration": 102,
+        "loss": 0.34041534324916345
+      },
+      {
+        "iteration": 103,
+        "loss": 0.3396996497520613
+      },
+      {
+        "iteration": 104,
+        "loss": 0.3389928546677358
+      },
+      {
+        "iteration": 105,
+        "loss": 0.3382947532885952
+      },
+      {
+        "iteration": 106,
+        "loss": 0.3376051470196282
+      },
+      {
+        "iteration": 107,
+        "loss": 0.3369238431644222
+      },
+      {
+        "iteration": 108,
+        "loss": 0.3362506547196197
+      },
+      {
+        "iteration": 109,
+        "loss": 0.3355854001774287
+      },
+      {
+        "iteration": 110,
+        "loss": 0.3349279033359199
+      },
+      {
+        "iteration": 111,
+        "loss": 0.3342779931166641
+      },
+      {
+        "iteration": 112,
+        "loss": 0.33363550338949344
+      },
+      {
+        "iteration": 113,
+        "loss": 0.3330002728040118
+      },
+      {
+        "iteration": 114,
+        "loss": 0.33237214462761056
+      },
+      {
+        "iteration": 115,
+        "loss": 0.33175096658967046
+      },
+      {
+        "iteration": 116,
+        "loss": 0.331136590731734
+      },
+      {
+        "iteration": 117,
+        "loss": 0.3305288732633728
+      },
+      {
+        "iteration": 118,
+        "loss": 0.32992767442347315
+      },
+      {
+        "iteration": 119,
+        "loss": 0.3293328583468033
+      },
+      {
+        "iteration": 120,
+        "loss": 0.32874429293555896
+      },
+      {
+        "iteration": 121,
+        "loss": 0.3281618497356913
+      },
+      {
+        "iteration": 122,
+        "loss": 0.32758540381788226
+      },
+      {
+        "iteration": 123,
+        "loss": 0.3270148336628973
+      },
+      {
+        "iteration": 124,
+        "loss": 0.32645002105117926
+      },
+      {
+        "iteration": 125,
+        "loss": 0.3258908509564907
+      },
+      {
+        "iteration": 126,
+        "loss": 0.3253372114434714
+      },
+      {
+        "iteration": 127,
+        "loss": 0.32478899356890945
+      },
+      {
+        "iteration": 128,
+        "loss": 0.3242460912865717
+      },
+      {
+        "iteration": 129,
+        "loss": 0.3237084013555466
+      },
+      {
+        "iteration": 130,
+        "loss": 0.3231758232518035
+      },
+      {
+        "iteration": 131,
+        "loss": 0.32264825908295636
+      },
+      {
+        "iteration": 132,
+        "loss": 0.32212561350610036
+      },
+      {
+        "iteration": 133,
+        "loss": 0.32160779364850367
+      },
+      {
+        "iteration": 134,
+        "loss": 0.3210947090311633
+      },
+      {
+        "iteration": 135,
+        "loss": 0.32058627149501995
+      },
+      {
+        "iteration": 136,
+        "loss": 0.3200823951297798
+      },
+      {
+        "iteration": 137,
+        "loss": 0.3195829962052242
+      },
+      {
+        "iteration": 138,
+        "loss": 0.3190879931049024
+      },
+      {
+        "iteration": 139,
+        "loss": 0.3185973062621317
+      },
+      {
+        "iteration": 140,
+        "loss": 0.3181108580981981
+      },
+      {
+        "iteration": 141,
+        "loss": 0.31762857296269664
+      },
+      {
+        "iteration": 142,
+        "loss": 0.3171503770759061
+      },
+      {
+        "iteration": 143,
+        "loss": 0.31667619847313017
+      },
+      {
+        "iteration": 144,
+        "loss": 0.3162059669509205
+      },
+      {
+        "iteration": 145,
+        "loss": 0.31573961401514916
+      },
+      {
+        "iteration": 146,
+        "loss": 0.31527707283079254
+      },
+      {
+        "iteration": 147,
+        "loss": 0.3148182781734378
+      },
+      {
+        "iteration": 148,
+        "loss": 0.31436316638237694
+      },
+      {
+        "iteration": 149,
+        "loss": 0.31391167531529957
+      },
+      {
+        "iteration": 150,
+        "loss": 0.31346374430444046
+      },
+      {
+        "iteration": 151,
+        "loss": 0.31301931411423095
+      },
+      {
+        "iteration": 152,
+        "loss": 0.3125783269003095
+      },
+      {
+        "iteration": 153,
+        "loss": 0.31214072616986277
+      },
+      {
+        "iteration": 154,
+        "loss": 0.31170645674332176
+      },
+      {
+        "iteration": 155,
+        "loss": 0.3112754647172264
+      },
+      {
+        "iteration": 156,
+        "loss": 0.31084769742835866
+      },
+      {
+        "iteration": 157,
+        "loss": 0.31042310341897716
+      },
+      {
+        "iteration": 158,
+        "loss": 0.31000163240322953
+      },
+      {
+        "iteration": 159,
+        "loss": 0.3095832352345897
+      },
+      {
+        "iteration": 160,
+        "loss": 0.309167863874338
+      },
+      {
+        "iteration": 161,
+        "loss": 0.3087554713610986
+      },
+      {
+        "iteration": 162,
+        "loss": 0.30834601178125953
+      },
+      {
+        "iteration": 163,
+        "loss": 0.30793944024037573
+      },
+      {
+        "iteration": 164,
+        "loss": 0.3075357128354728
+      },
+      {
+        "iteration": 165,
+        "loss": 0.3071347866281938
+      },
+      {
+        "iteration": 166,
+        "loss": 0.30673661961878623
+      },
+      {
+        "iteration": 167,
+        "loss": 0.3063411707209126
+      },
+      {
+        "iteration": 168,
+        "loss": 0.3059483997372357
+      },
+      {
+        "iteration": 169,
+        "loss": 0.3055582673357348
+      },
+      {
+        "iteration": 170,
+        "loss": 0.305170735026778
+      },
+      {
+        "iteration": 171,
+        "loss": 0.3047857651408855
+      },
+      {
+        "iteration": 172,
+        "loss": 0.3044033208071523
+      },
+      {
+        "iteration": 173,
+        "loss": 0.30402336593235885
+      },
+      {
+        "iteration": 174,
+        "loss": 0.3036458651806814
+      },
+      {
+        "iteration": 175,
+        "loss": 0.30327078395403984
+      },
+      {
+        "iteration": 176,
+        "loss": 0.30289808837301224
+      },
+      {
+        "iteration": 177,
+        "loss": 0.3025277452583409
+      },
+      {
+        "iteration": 178,
+        "loss": 0.3021597221129711
+      },
+      {
+        "iteration": 179,
+        "loss": 0.30179398710463196
+      },
+      {
+        "iteration": 180,
+        "loss": 0.3014305090489422
+      },
+      {
+        "iteration": 181,
+        "loss": 0.3010692573929878
+      },
+      {
+        "iteration": 182,
+        "loss": 0.300710202199401
+      },
+      {
+        "iteration": 183,
+        "loss": 0.30035331413091215
+      },
+      {
+        "iteration": 184,
+        "loss": 0.2999985644353232
+      },
+      {
+        "iteration": 185,
+        "loss": 0.2996459249309393
+      },
+      {
+        "iteration": 186,
+        "loss": 0.2992953679924277
+      },
+      {
+        "iteration": 187,
+        "loss": 0.29894686653705416
+      },
+      {
+        "iteration": 188,
+        "loss": 0.2986003940113498
+      },
+      {
+        "iteration": 189,
+        "loss": 0.2982559243781296
+      },
+      {
+        "iteration": 190,
+        "loss": 0.29791343210390747
+      },
+      {
+        "iteration": 191,
+        "loss": 0.2975728921466331
+      },
+      {
+        "iteration": 192,
+        "loss": 0.29723427994383544
+      },
+      {
+        "iteration": 193,
+        "loss": 0.29689757140101886
+      },
+      {
+        "iteration": 194,
+        "loss": 0.29656274288045736
+      },
+      {
+        "iteration": 195,
+        "loss": 0.2962297711902759
+      },
+      {
+        "iteration": 196,
+        "loss": 0.29589863357381413
+      },
+      {
+        "iteration": 197,
+        "loss": 0.2955693076993314
+      },
+      {
+        "iteration": 198,
+        "loss": 0.2952417716499477
+      },
+      {
+        "iteration": 199,
+        "loss": 0.29491600391390527
+      },
+      {
+        "iteration": 200,
+        "loss": 0.29459198337506415
+      },
+      {
+        "iteration": 201,
+        "loss": 0.29426968930368846
+      },
+      {
+        "iteration": 202,
+        "loss": 0.2939491013474556
+      },
+      {
+        "iteration": 203,
+        "loss": 0.2936301995227271
+      },
+      {
+        "iteration": 204,
+        "loss": 0.2933129642060548
+      },
+      {
+        "iteration": 205,
+        "loss": 0.2929973761259095
+      },
+      {
+        "iteration": 206,
+        "loss": 0.29268341635463846
+      },
+      {
+        "iteration": 207,
+        "loss": 0.29237106630063614
+      },
+      {
+        "iteration": 208,
+        "loss": 0.2920603077007196
+      },
+      {
+        "iteration": 209,
+        "loss": 0.2917511226127219
+      },
+      {
+        "iteration": 210,
+        "loss": 0.2914434934082708
+      },
+      {
+        "iteration": 211,
+        "loss": 0.2911374027657389
+      },
+      {
+        "iteration": 212,
+        "loss": 0.2908328336634307
+      },
+      {
+        "iteration": 213,
+        "loss": 0.2905297693728988
+      },
+      {
+        "iteration": 214,
+        "loss": 0.2902281934524626
+      },
+      {
+        "iteration": 215,
+        "loss": 0.28992808974087286
+      },
+      {
+        "iteration": 216,
+        "loss": 0.2896294423511776
+      },
+      {
+        "iteration": 217,
+        "loss": 0.2893322356647086
+      },
+      {
+        "iteration": 218,
+        "loss": 0.2890364543252487
+      },
+      {
+        "iteration": 219,
+        "loss": 0.28874208323333
+      },
+      {
+        "iteration": 220,
+        "loss": 0.2884491075406921
+      },
+      {
+        "iteration": 221,
+        "loss": 0.2881575126448909
+      },
+      {
+        "iteration": 222,
+        "loss": 0.28786728418400276
+      },
+      {
+        "iteration": 223,
+        "loss": 0.2875784080315169
+      },
+      {
+        "iteration": 224,
+        "loss": 0.28729087029131956
+      },
+      {
+        "iteration": 225,
+        "loss": 0.28700465729281754
+      },
+      {
+        "iteration": 226,
+        "loss": 0.2867197555861907
+      },
+      {
+        "iteration": 227,
+        "loss": 0.28643615193774274
+      },
+      {
+        "iteration": 228,
+        "loss": 0.2861538333253862
+      },
+      {
+        "iteration": 229,
+        "loss": 0.28587278693423585
+      },
+      {
+        "iteration": 230,
+        "loss": 0.28559300015230754
+      },
+      {
+        "iteration": 231,
+        "loss": 0.28531446056632964
+      },
+      {
+        "iteration": 232,
+        "loss": 0.2850371559576425
+      },
+      {
+        "iteration": 233,
+        "loss": 0.2847610742982134
+      },
+      {
+        "iteration": 234,
+        "loss": 0.28448620374675004
+      },
+      {
+        "iteration": 235,
+        "loss": 0.2842125326448928
+      },
+      {
+        "iteration": 236,
+        "loss": 0.2839400495135088
+      },
+      {
+        "iteration": 237,
+        "loss": 0.28366874304909584
+      },
+      {
+        "iteration": 238,
+        "loss": 0.28339860212021994
+      },
+      {
+        "iteration": 239,
+        "loss": 0.283129615764095
+      },
+      {
+        "iteration": 240,
+        "loss": 0.28286177318321465
+      },
+      {
+        "iteration": 241,
+        "loss": 0.28259506374207083
+      },
+      {
+        "iteration": 242,
+        "loss": 0.28232947696394634
+      },
+      {
+        "iteration": 243,
+        "loss": 0.2820650025277863
+      },
+      {
+        "iteration": 244,
+        "loss": 0.28180163026515187
+      },
+      {
+        "iteration": 245,
+        "loss": 0.28153935015723314
+      },
+      {
+        "iteration": 246,
+        "loss": 0.2812781523319257
+      },
+      {
+        "iteration": 247,
+        "loss": 0.2810180270610089
+      },
+      {
+        "iteration": 248,
+        "loss": 0.28075896475734513
+      },
+      {
+        "iteration": 249,
+        "loss": 0.2805009559721819
+      },
+      {
+        "iteration": 250,
+        "loss": 0.2802439913924915
+      },
+      {
+        "iteration": 251,
+        "loss": 0.27998806183838476
+      },
+      {
+        "iteration": 252,
+        "loss": 0.2797331582605736
+      },
+      {
+        "iteration": 253,
+        "loss": 0.27947927173791753
+      },
+      {
+        "iteration": 254,
+        "loss": 0.27922639347498024
+      },
+      {
+        "iteration": 255,
+        "loss": 0.27897451479968877
+      },
+      {
+        "iteration": 256,
+        "loss": 0.2787236271610211
+      },
+      {
+        "iteration": 257,
+        "loss": 0.2784737221267402
+      },
+      {
+        "iteration": 258,
+        "loss": 0.27822479138120565
+      },
+      {
+        "iteration": 259,
+        "loss": 0.27797682672320806
+      },
+      {
+        "iteration": 260,
+        "loss": 0.2777298200638593
+      },
+      {
+        "iteration": 261,
+        "loss": 0.2774837634245406
+      },
+      {
+        "iteration": 262,
+        "loss": 0.2772386489348837
+      },
+      {
+        "iteration": 263,
+        "loss": 0.27699446883079776
+      },
+      {
+        "iteration": 264,
+        "loss": 0.27675121545254106
+      },
+      {
+        "iteration": 265,
+        "loss": 0.2765088812428541
+      },
+      {
+        "iteration": 266,
+        "loss": 0.27626745874509606
+      },
+      {
+        "iteration": 267,
+        "loss": 0.2760269406014454
+      },
+      {
+        "iteration": 268,
+        "loss": 0.275787319551154
+      },
+      {
+        "iteration": 269,
+        "loss": 0.2755485884287962
+      },
+      {
+        "iteration": 270,
+        "loss": 0.2753107401625928
+      },
+      {
+        "iteration": 271,
+        "loss": 0.2750737677727727
+      },
+      {
+        "iteration": 272,
+        "loss": 0.2748376643699368
+      },
+      {
+        "iteration": 273,
+        "loss": 0.27460242315347466
+      },
+      {
+        "iteration": 274,
+        "loss": 0.27436803741004356
+      },
+      {
+        "iteration": 275,
+        "loss": 0.27413450051201627
+      },
+      {
+        "iteration": 276,
+        "loss": 0.2739018059160407
+      },
+      {
+        "iteration": 277,
+        "loss": 0.2736699471615393
+      },
+      {
+        "iteration": 278,
+        "loss": 0.2734389178693313
+      },
+      {
+        "iteration": 279,
+        "loss": 0.2732087117402226
+      },
+      {
+        "iteration": 280,
+        "loss": 0.27297932255363483
+      },
+      {
+        "iteration": 281,
+        "loss": 0.27275074416629874
+      },
+      {
+        "iteration": 282,
+        "loss": 0.27252297051091895
+      },
+      {
+        "iteration": 283,
+        "loss": 0.272295995594907
+      },
+      {
+        "iteration": 284,
+        "loss": 0.27206981349913734
+      },
+      {
+        "iteration": 285,
+        "loss": 0.2718444183767082
+      },
+      {
+        "iteration": 286,
+        "loss": 0.2716198044517391
+      },
+      {
+        "iteration": 287,
+        "loss": 0.2713959660182111
+      },
+      {
+        "iteration": 288,
+        "loss": 0.2711728974387873
+      },
+      {
+        "iteration": 289,
+        "loss": 0.27095059314370945
+      },
+      {
+        "iteration": 290,
+        "loss": 0.27072904762966643
+      },
+      {
+        "iteration": 291,
+        "loss": 0.27050825545872687
+      },
+      {
+        "iteration": 292,
+        "loss": 0.270288211257273
+      },
+      {
+        "iteration": 293,
+        "loss": 0.27006890971495645
+      },
+      {
+        "iteration": 294,
+        "loss": 0.2698503455836727
+      },
+      {
+        "iteration": 295,
+        "loss": 0.26963251367657587
+      },
+      {
+        "iteration": 296,
+        "loss": 0.2694154088670738
+      },
+      {
+        "iteration": 297,
+        "loss": 0.2691990260878972
+      },
+      {
+        "iteration": 298,
+        "loss": 0.26898336033012404
+      },
+      {
+        "iteration": 299,
+        "loss": 0.2687684066422834
+      },
+      {
+        "iteration": 300,
+        "loss": 0.2685541601294394
+      }
+    ],
+    "parallelism": "gradientes parciales calculados con goroutines y reducidos por el coordinador sin estado compartido mutable"
+  },
+  "created_at": "2026-06-26T14:34:03-05:00",
+  "usage_note": "Las features recibidas por una API deben conservar el orden feature_names y normalizarse con normalizer (ajustado solo con train) antes de aplicar sigmoid(bias + sum(weights[i]*x[i])). Si probabilidad \u003e= decision_boundary, high_demand=1."
+}

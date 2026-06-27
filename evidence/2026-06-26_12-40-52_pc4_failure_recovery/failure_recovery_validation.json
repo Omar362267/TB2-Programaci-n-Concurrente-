@@ -1,0 +1,14 @@
+﻿{
+    "pre_failure_status":  "ready",
+    "pre_failure_nodes_available":  4,
+    "degraded_status":  "degraded",
+    "degraded_nodes_available":  3,
+    "training_rejected":  true,
+    "rejected_train_http_status":  503,
+    "recovered_status":  "ready",
+    "recovered_nodes_available":  4,
+    "model_version_before":  3,
+    "model_version_after":  3,
+    "model_unchanged_after_rejected_train":  true,
+    "generated_at":  "2026-06-26T12:41:06.4547165-05:00"
+}

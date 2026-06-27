@@ -1,0 +1,10 @@
+﻿{
+    "name":  "go_test",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:46:22.8193409-05:00",
+    "finished_at":  "2026-06-26T11:46:27.5325085-05:00",
+    "duration_ms":  4713,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

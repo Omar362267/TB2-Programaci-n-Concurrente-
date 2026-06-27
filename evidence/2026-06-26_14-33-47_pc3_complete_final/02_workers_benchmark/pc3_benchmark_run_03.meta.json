@@ -1,0 +1,10 @@
+﻿{
+    "name":  "pc3_benchmark_run_03",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:37:38.5553196-05:00",
+    "finished_at":  "2026-06-26T14:39:33.8481330-05:00",
+    "duration_ms":  115293,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

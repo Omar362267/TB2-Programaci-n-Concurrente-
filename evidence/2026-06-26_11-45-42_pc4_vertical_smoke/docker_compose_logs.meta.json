@@ -1,0 +1,10 @@
+﻿{
+    "name":  "docker_compose_logs",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:55:59.7378019-05:00",
+    "finished_at":  "2026-06-26T11:55:59.9890415-05:00",
+    "duration_ms":  251,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

@@ -1,0 +1,10 @@
+﻿{
+    "name":  "compose_ps_after_recovery",
+    "status":  "passed",
+    "started_at":  "2026-06-26T12:41:06.0334946-05:00",
+    "finished_at":  "2026-06-26T12:41:06.3845784-05:00",
+    "duration_ms":  351,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

@@ -1,0 +1,10 @@
+﻿{
+    "name":  "docker_compose_version",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:46:00.8826635-05:00",
+    "finished_at":  "2026-06-26T11:46:00.9855221-05:00",
+    "duration_ms":  103,
+    "exit_code":  0,
+    "allow_failure":  true,
+    "error":  null
+}

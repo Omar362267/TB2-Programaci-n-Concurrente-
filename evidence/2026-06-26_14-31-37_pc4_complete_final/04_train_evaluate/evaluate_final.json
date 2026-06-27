@@ -1,0 +1,25 @@
+﻿{
+    "evaluation":  {
+                       "model_version":  3,
+                       "test_data_path":  "data/distributed/test.csv",
+                       "samples":  409856,
+                       "feature_count":  11,
+                       "decision_boundary":  0.5,
+                       "loss":  0.26775981509786934,
+                       "classification":  {
+                                              "accuracy":  0.8888268074640849,
+                                              "precision":  0.8587728034897061,
+                                              "recall":  0.6646857923497268,
+                                              "f1_score":  0.7493660581191315,
+                                              "true_positive":  68117,
+                                              "true_negative":  296174,
+                                              "false_positive":  11202,
+                                              "false_negative":  34363,
+                                              "samples":  409856
+                                          },
+                       "duration_ms":  49,
+                       "evaluated_at":  "2026-06-26T19:32:38Z",
+                       "data_split":  "hold-out test.csv; no usado para actualizar pesos"
+                   },
+    "status":  "evaluated"
+}

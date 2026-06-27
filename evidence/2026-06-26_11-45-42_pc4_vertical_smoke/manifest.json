@@ -1,0 +1,114 @@
+﻿{
+    "schema_version":  "pc4-phase2-v1",
+    "generated_at":  "2026-06-26T11:52:05-05:00",
+    "source_input":  "data/raw/household_power_consumption.txt",
+    "source_model_artifact":  "results/final_run_phase1/modelo_entrenado.json",
+    "valid_records":  2049280,
+    "train_samples":  1639424,
+    "test_samples":  409856,
+    "shard_count":  4,
+    "split":  {
+                  "test_ratio":  0.2,
+                  "seed":  42
+              },
+    "feature_names":  [
+                          "hour",
+                          "day_of_week",
+                          "month",
+                          "is_weekend",
+                          "voltage",
+                          "global_reactive_power",
+                          "global_intensity",
+                          "sub_metering_1",
+                          "sub_metering_2",
+                          "sub_metering_3",
+                          "other_consumption"
+                      ],
+    "normalizer":  {
+                       "method":  "min-max",
+                       "feature_names":  [
+                                             "hour",
+                                             "day_of_week",
+                                             "month",
+                                             "is_weekend",
+                                             "voltage",
+                                             "global_reactive_power",
+                                             "global_intensity",
+                                             "sub_metering_1",
+                                             "sub_metering_2",
+                                             "sub_metering_3",
+                                             "other_consumption"
+                                         ],
+                       "mins":  [
+                                    0,
+                                    0,
+                                    1,
+                                    0,
+                                    223.2,
+                                    0,
+                                    0.2,
+                                    0,
+                                    0,
+                                    0,
+                                    -2.1333333333333337
+                                ],
+                       "maxs":  [
+                                    23,
+                                    6,
+                                    12,
+                                    1,
+                                    254.15,
+                                    1.39,
+                                    48.4,
+                                    88,
+                                    80,
+                                    31,
+                                    124.83333333333334
+                                ],
+                       "fitted_on":  "training_set_only"
+                   },
+    "target_definition":  "high_demand = 1 si Global_active_power \u003e= percentil 75; 0 en caso contrario",
+    "high_demand_threshold_p75":  1.528,
+    "test_file":  "test.csv",
+    "test_sha256":  "01d0512a9a2065e999cc57b7bc0c7e93ae9584f2b3c2e8fad6030595e6248f47",
+    "shards":  [
+                   {
+                       "node_id":  "ml-node-1",
+                       "file":  "node-01-train.csv",
+                       "samples":  409856,
+                       "positive_samples":  102766,
+                       "negative_samples":  307090,
+                       "sha256":  "98b6dbeb06d455294e336eb012b3da54857526a81bf729756954a4d828bc2999"
+                   },
+                   {
+                       "node_id":  "ml-node-2",
+                       "file":  "node-02-train.csv",
+                       "samples":  409856,
+                       "positive_samples":  102814,
+                       "negative_samples":  307042,
+                       "sha256":  "a56c9143af7c927d56e37af86883d3ffa046cb6b55153c6ff0bb408c32b5046c"
+                   },
+                   {
+                       "node_id":  "ml-node-3",
+                       "file":  "node-03-train.csv",
+                       "samples":  409856,
+                       "positive_samples":  102858,
+                       "negative_samples":  306998,
+                       "sha256":  "f7a9bad1d309966d5ffcd2a63d44a3bd8f79e959b76d7d4d6ea8165bcf81605f"
+                   },
+                   {
+                       "node_id":  "ml-node-4",
+                       "file":  "node-04-train.csv",
+                       "samples":  409856,
+                       "positive_samples":  102508,
+                       "negative_samples":  307348,
+                       "sha256":  "8b1221737baea7f73d9d3b7915df90bcd0065dd558a225891d88a50bfa9284e0"
+                   }
+               ],
+    "validation":  {
+                       "train_shard_samples":  1639424,
+                       "train_coverage_matches":  true,
+                       "difference_max_min_shard":  0,
+                       "normalizer_training_set_only":  true
+                   }
+}

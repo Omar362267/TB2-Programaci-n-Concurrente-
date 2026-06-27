@@ -1,0 +1,10 @@
+﻿{
+    "name":  "system_info",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:46:00.9900735-05:00",
+    "finished_at":  "2026-06-26T11:46:02.0665129-05:00",
+    "duration_ms":  1076,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

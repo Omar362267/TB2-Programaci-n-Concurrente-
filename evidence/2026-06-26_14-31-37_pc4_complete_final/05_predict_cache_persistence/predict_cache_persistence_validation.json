@@ -1,0 +1,15 @@
+﻿{
+    "first_cache_hit":  false,
+    "second_cache_hit":  true,
+    "probability_first":  0.64960488918196524,
+    "probability_second":  0.64960488918196524,
+    "model_version":  3,
+    "predicted_class":  1,
+    "redis_key_found":  "pc4:prediction:bf02396086b9f3b02f7f86a7ab22a05889fc2c0b35db5861304027ea7ba23b71",
+    "redis_ttl_seconds":  299,
+    "expected_missing_feature_error":  true,
+    "mongo_prediction_logs_before":  0,
+    "mongo_prediction_logs_after":  2,
+    "mongo_training_runs":  2,
+    "generated_at":  "2026-06-26T14:32:43.6804340-05:00"
+}

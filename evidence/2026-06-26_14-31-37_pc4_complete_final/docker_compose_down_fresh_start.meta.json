@@ -1,0 +1,10 @@
+﻿{
+    "name":  "docker_compose_down_fresh_start",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:31:39.2645691-05:00",
+    "finished_at":  "2026-06-26T14:31:41.1036117-05:00",
+    "duration_ms":  1839,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

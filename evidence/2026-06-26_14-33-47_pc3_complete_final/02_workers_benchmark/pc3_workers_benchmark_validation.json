@@ -1,0 +1,18 @@
+﻿{
+    "repetitions_requested":  3,
+    "workers_requested":  [
+                              1,
+                              2,
+                              4,
+                              8
+                          ],
+    "total_observations":  12,
+    "expected_observations":  12,
+    "all_observations_present":  true,
+    "quality_consistent":  true,
+    "baseline_workers":  1,
+    "median_csv":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\02_workers_benchmark\\pc3_workers_median.csv",
+    "median_json":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\02_workers_benchmark\\pc3_workers_median.json",
+    "summary_markdown":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\02_workers_benchmark\\pc3_workers_summary.md",
+    "generated_at":  "2026-06-26T14:39:33.9546214-05:00"
+}

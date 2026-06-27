@@ -1,0 +1,14 @@
+{
+  "input_path": "data/raw/household_power_consumption.txt",
+  "workers": 8,
+  "limit": 0,
+  "iterations": 300,
+  "learning_rate": 1,
+  "test_ratio": 0.2,
+  "output_dir": "results/final_run_phase1",
+  "processed_out": "data/processed",
+  "created_at": "2026-06-26T14:33:48-05:00",
+  "go_version": "go1.26.1",
+  "operating_system": "windows",
+  "architecture": "amd64"
+}

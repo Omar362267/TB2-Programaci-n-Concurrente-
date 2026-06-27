@@ -1,0 +1,10 @@
+﻿{
+    "name":  "stop_ml_node_4",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:32:43.8290195-05:00",
+    "finished_at":  "2026-06-26T14:32:44.3381384-05:00",
+    "duration_ms":  509,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

@@ -1,0 +1,11 @@
+﻿.git
+.gitignore
+cmd.zip
+pc3.exe
+
+data/
+results/
+docs/
+
+docker-compose.yml
+compose.yml

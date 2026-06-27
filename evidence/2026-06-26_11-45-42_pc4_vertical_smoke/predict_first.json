@@ -1,0 +1,34 @@
+﻿{
+    "model_version":  3,
+    "probability_high_demand":  0.6496048891819652,
+    "predicted_high_demand":  1,
+    "decision_boundary":  0.5,
+    "feature_order":  [
+                          "hour",
+                          "day_of_week",
+                          "month",
+                          "is_weekend",
+                          "voltage",
+                          "global_reactive_power",
+                          "global_intensity",
+                          "sub_metering_1",
+                          "sub_metering_2",
+                          "sub_metering_3",
+                          "other_consumption"
+                      ],
+    "input":  {
+                  "day_of_week":  6,
+                  "global_intensity":  7.2,
+                  "global_reactive_power":  0.15,
+                  "hour":  20,
+                  "is_weekend":  1,
+                  "month":  12,
+                  "other_consumption":  12.5,
+                  "sub_metering_1":  0,
+                  "sub_metering_2":  1,
+                  "sub_metering_3":  18,
+                  "voltage":  240.8
+              },
+    "latency_ms":  0,
+    "cache_hit":  false
+}

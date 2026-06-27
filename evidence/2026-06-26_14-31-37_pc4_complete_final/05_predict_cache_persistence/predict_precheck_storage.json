@@ -1,0 +1,7 @@
+﻿{
+    "mongo_enabled":  true,
+    "mongo_status":  "ready",
+    "redis_enabled":  true,
+    "redis_status":  "ready",
+    "cache_ttl_seconds":  300
+}

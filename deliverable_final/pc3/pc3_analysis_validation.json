@@ -1,0 +1,10 @@
+﻿{
+    "workers":  8,
+    "table_count":  9,
+    "figure_count":  7,
+    "required_tables_present":  true,
+    "required_figures_present":  true,
+    "analysis_evidence_path":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\03_analysis\\analysis_tables",
+    "figures_evidence_path":  "C:\\Users\\yamir\\Desktop\\Trabajo final Concurrente\\TB2-Programaci-n-Concurrente-\\evidence\\2026-06-26_14-33-47_pc3_complete_final\\03_analysis\\analysis_figures",
+    "generated_at":  "2026-06-26T14:39:39.7467172-05:00"
+}

@@ -1,0 +1,17 @@
+{
+  "performance": {
+    "workers": 8,
+    "rows_processed": 2075259,
+    "load_duration_ms": 3045,
+    "feature_duration_ms": 1259,
+    "train_duration_ms": 11437,
+    "total_duration_ms": 15763,
+    "rows_per_second": 131648.5512955722
+  },
+  "notes": [
+    "La carga y limpieza se ejecutan con patron productor/consumidor usando goroutines y channels.",
+    "El entrenamiento calcula gradientes parciales en paralelo y luego los reduce en el coordinador.",
+    "Para comparar rendimiento, ejecutar el mismo comando con -workers 1, 2, 4 y 8 manteniendo el mismo -limit, -iterations y -lr.",
+    "El entrenamiento puede ser rapido porque es regresion logistica con 11 features, no una red neuronal profunda; la evidencia se valida con conteos, tiempos, loss inicial/final y archivo del modelo."
+  ]
+}

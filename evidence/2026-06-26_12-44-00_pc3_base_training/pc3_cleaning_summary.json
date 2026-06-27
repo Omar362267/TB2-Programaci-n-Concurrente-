@@ -1,0 +1,24 @@
+{
+  "total_rows": 2075259,
+  "valid_rows": 2049280,
+  "invalid_rows": 25979,
+  "workers": 8,
+  "discard_reasons": {
+    "missing_value": 25979
+  },
+  "duration_ms": 3045,
+  "rows_per_second": 681521.7232814102,
+  "discard_policy": "Se descartan filas vacias, filas con '?' como valor faltante, filas con columnas incompletas, fechas invalidas, numeros invalidos o rangos fisicamente inconsistentes.",
+  "dataset_columns": [
+    "Date",
+    "Time",
+    "Global_active_power",
+    "Global_reactive_power",
+    "Voltage",
+    "Global_intensity",
+    "Sub_metering_1",
+    "Sub_metering_2",
+    "Sub_metering_3"
+  ],
+  "concurrency_model": "Productor/consumidor: una goroutine lectora envia filas por channel; N workers parsean y validan; el coordinador reduce parciales sin estado compartido mutable."
+}

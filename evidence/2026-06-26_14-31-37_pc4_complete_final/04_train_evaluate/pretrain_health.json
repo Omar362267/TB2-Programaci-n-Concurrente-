@@ -1,0 +1,50 @@
+﻿{
+    "cluster":  {
+                    "status":  "ready",
+                    "nodes_total":  4,
+                    "nodes_available":  4,
+                    "total_samples":  1639424,
+                    "feature_count":  11,
+                    "nodes":  [
+                                  {
+                                      "id":  "ml-node-1",
+                                      "address":  "ml-node-1:9101",
+                                      "status":  "ready",
+                                      "available":  true,
+                                      "samples":  409856,
+                                      "feature_count":  11,
+                                      "latency_ms":  1
+                                  },
+                                  {
+                                      "id":  "ml-node-2",
+                                      "address":  "ml-node-2:9102",
+                                      "status":  "ready",
+                                      "available":  true,
+                                      "samples":  409856,
+                                      "feature_count":  11,
+                                      "latency_ms":  0
+                                  },
+                                  {
+                                      "id":  "ml-node-3",
+                                      "address":  "ml-node-3:9103",
+                                      "status":  "ready",
+                                      "available":  true,
+                                      "samples":  409856,
+                                      "feature_count":  11,
+                                      "latency_ms":  0
+                                  },
+                                  {
+                                      "id":  "ml-node-4",
+                                      "address":  "ml-node-4:9104",
+                                      "status":  "ready",
+                                      "available":  true,
+                                      "samples":  409856,
+                                      "feature_count":  11,
+                                      "latency_ms":  1
+                                  }
+                              ]
+                },
+    "response_time_ms":  1,
+    "service":  "pc4-api-coordinator",
+    "status":  "ready"
+}

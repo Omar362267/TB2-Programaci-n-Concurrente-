@@ -1,0 +1,8 @@
+{
+  "threshold_p75": 1.528,
+  "normal_count": 1535854,
+  "high_demand_count": 513426,
+  "normal_rate": 0.7494602982510931,
+  "high_demand_rate": 0.25053970174890694,
+  "definition": "high_demand = 1 si Global_active_power \u003e= percentil 75"
+}

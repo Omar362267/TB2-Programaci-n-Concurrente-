@@ -1,0 +1,30 @@
+﻿[
+    {
+        "relative_path":  "consumo_por_dia_semana.svg",
+        "bytes":  3288
+    },
+    {
+        "relative_path":  "consumo_por_mes.svg",
+        "bytes":  4286
+    },
+    {
+        "relative_path":  "consumo_promedio_por_hora.svg",
+        "bytes":  6781
+    },
+    {
+        "relative_path":  "curva_loss.svg",
+        "bytes":  32707
+    },
+    {
+        "relative_path":  "distribucion_global_active_power.svg",
+        "bytes":  6109
+    },
+    {
+        "relative_path":  "matriz_confusion.svg",
+        "bytes":  2031
+    },
+    {
+        "relative_path":  "matriz_correlacion.svg",
+        "bytes":  16384
+    }
+]

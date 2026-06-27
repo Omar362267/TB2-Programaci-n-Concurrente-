@@ -1,0 +1,10 @@
+﻿{
+    "name":  "shard_data_generation",
+    "status":  "passed",
+    "started_at":  "2026-06-26T14:32:02.1515361-05:00",
+    "finished_at":  "2026-06-26T14:32:10.3078755-05:00",
+    "duration_ms":  8156,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

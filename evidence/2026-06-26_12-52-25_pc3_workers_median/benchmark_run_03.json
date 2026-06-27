@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "workers": 1,
+      "rows_processed": 2075259,
+      "load_duration_ms": 3851,
+      "feature_duration_ms": 913,
+      "train_duration_ms": 43837,
+      "total_duration_ms": 48623,
+      "rows_per_second": 42679.83446363023,
+      "speedup": 1,
+      "efficiency": 1
+    },
+    {
+      "workers": 2,
+      "rows_processed": 2075259,
+      "load_duration_ms": 3456,
+      "feature_duration_ms": 1045,
+      "train_duration_ms": 24109,
+      "total_duration_ms": 28646,
+      "rows_per_second": 72443.22169962445,
+      "speedup": 1.697374851637227,
+      "efficiency": 0.8486874258186135
+    },
+    {
+      "workers": 4,
+      "rows_processed": 2075259,
+      "load_duration_ms": 3450,
+      "feature_duration_ms": 1189,
+      "train_duration_ms": 21015,
+      "total_duration_ms": 25698,
+      "rows_per_second": 80755.0972180337,
+      "speedup": 1.8920927698653591,
+      "efficiency": 0.4730231924663398
+    },
+    {
+      "workers": 8,
+      "rows_processed": 2075259,
+      "load_duration_ms": 2852,
+      "feature_duration_ms": 994,
+      "train_duration_ms": 12675,
+      "total_duration_ms": 16554,
+      "rows_per_second": 125358.5206428571,
+      "speedup": 2.9372357134227376,
+      "efficiency": 0.3671544641778422
+    }
+  ],
+  "notes": [
+    "Benchmark generado en Go ejecutando el mismo pipeline con distintas cantidades de workers.",
+    "El speedup usa como linea base la primera configuracion de la lista, normalmente 1 worker.",
+    "Los resultados pueden variar segun CPU, disco, carga del sistema y temperatura del equipo."
+  ]
+}

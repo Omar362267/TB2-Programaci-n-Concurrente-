@@ -1,0 +1,10 @@
+﻿{
+    "name":  "gofmt_check",
+    "status":  "passed",
+    "started_at":  "2026-06-26T11:46:02.0918663-05:00",
+    "finished_at":  "2026-06-26T11:46:02.5699049-05:00",
+    "duration_ms":  478,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  null
+}

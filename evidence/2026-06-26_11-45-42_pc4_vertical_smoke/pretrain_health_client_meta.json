@@ -1,0 +1,7 @@
+﻿{
+    "endpoint":  "http://127.0.0.1:8080/health",
+    "method":  "GET",
+    "requested_at":  "2026-06-26T12:03:28.6719358-05:00",
+    "duration_ms":  6,
+    "success":  true
+}

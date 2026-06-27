@@ -1,0 +1,10 @@
+﻿{
+    "name":  "docker_compose_up_build",
+    "status":  "failed",
+    "started_at":  "2026-06-26T11:53:13.4605545-05:00",
+    "finished_at":  "2026-06-26T11:53:40.2557526-05:00",
+    "duration_ms":  26795,
+    "exit_code":  0,
+    "allow_failure":  false,
+    "error":  " Image pc4-energy-runtime:local Building "
+}
