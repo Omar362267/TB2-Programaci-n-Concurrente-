@@ -13,6 +13,7 @@ coverage.out
 # =========================
 /data/raw/*
 !/data/raw/.gitkeep
+!/data/raw/household_power_consumption.txt
 
 /data/processed/*
 !/data/processed/.gitkeep
@@ -27,8 +28,9 @@ coverage.out
 # Resultados generados
 # =========================
 /results/*
-!/results/.gitkeep
 !/results/README.md
+!/results/benchmarks_evidence/**
+!/results/analysis_evidence/**
 
 # Logs y temporales
 *.log
@@ -80,3 +82,10 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
+
+# =========================
+# Evidencias generadas
+# =========================
+/evidence/*
+!/evidence/**
+!/evidence/README.md
